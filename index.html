@@ -210,44 +210,149 @@ footer a {
 
   <h2>🍽️ EXPLORE OUR MENU</h2>
 
-  <div class="menu-grid">
+  <<section id="menu" class="thaai-menu">
+  <h2>🍽️ THAAI RESTAURANT MENU</h2>
+  <p>Tap a category to see all items.</p>
+  <div id="thaai-menu-categories"></div>
+</section>
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80"
-           alt="Indian Food">
-      <h3>Indian Food</h3>
-    </div>
+<style>
+.thaai-menu{max-width:1100px;margin:auto;padding:20px 12px}
+.thaai-menu h2,.thaai-menu>p{text-align:center}
+.menu-category{margin:12px 0;border:1px solid #ddd;border-radius:12px;overflow:hidden}
+.menu-category summary{background:#5b2a86;color:white;padding:16px;cursor:pointer;font-weight:bold}
+.menu-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}
+.menu-item{border-radius:10px;overflow:hidden;box-shadow:0 2px 8px #0002;background:white}
+.menu-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.menu-item-name{padding:10px 4px;text-align:center;font-weight:bold}
+@media(min-width:650px){.menu-items{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-           alt="Shawarma">
-      <h3>Shawarma</h3>
-    </div>
+<script>
+(() => {
+const menu = [
+["🧃 Fresh Juice",[
+["Watermelon Juice","watermelon juice"],["Muskmelon Juice","muskmelon juice"],
+["Apple Juice","apple juice"],["Grapes Juice","grape juice"],
+["Pineapple Juice","pineapple juice"],["Musambi Juice","sweet lime juice"],
+["Pomegranate Juice","pomegranate juice"],["Papaya Juice","papaya juice"]]],
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80"
-           alt="Rice and Chicken Rice">
-      <h3>Rice & Chicken Rice</h3>
-    </div>
+["🥤 Sodas",[
+["Lime Soda Salt","lime soda"],["Fresh Lemon Juice","lemon juice"],
+["Lemon Mint","lemon mint drink"],["Rose Milk","rose milk"],
+["Padam Ger (Rose & Basil)","rose basil drink"],["Masala Thumbs Up","cola soda"]]],
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80"
-           alt="Noodles">
-      <h3>Noodles</h3>
-    </div>
+["🥤 Ice Cream Milkshake",[
+["Vanilla Milkshake","vanilla milkshake"],["Chocolate Milkshake","chocolate milkshake"],
+["Strawberry Milkshake","strawberry milkshake"],["Oreo Milkshake","oreo milkshake"],
+["Butterscotch Milkshake","butterscotch milkshake"],["Pista Milkshake","pistachio milkshake"],
+["Black Current Milkshake","blackcurrant milkshake"]]],
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80"
-           alt="Milkshake">
-      <h3>Milkshakes</h3>
-    </div>
+["🍹 Mojito",[
+["Blue Current","blue mocktail"],["Mint Mojito","mint lime mojito"]]],
 
-    <div class="menu-card">
-      <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=600&q=80"
-           alt="Fresh Juice">
-      <h3>Fresh Juices</h3>
-    </div>
+["🍨 Ice Cream Scoop",[
+["Vanilla Topping","vanilla ice cream"],["Strawberry Topping","strawberry ice cream"],
+["Butterscotch Topping","butterscotch ice cream"],["Chocolate Topping","chocolate ice cream"],
+["Pistha Topping","pistachio ice cream"],["Black Current Topping","blackcurrant ice cream"],
+["Mango Topping","mango ice cream"]]],
 
+["🍛 Gravy",[
+["Chettinad Chicken Gravy","chettinad chicken curry"],["Pepper Chicken Gravy","pepper chicken curry"],
+["Chilli Chicken Gravy","chilli chicken gravy"],["Chicken Manchurian Gravy","chicken manchurian"],
+["Hyderabad Chicken Gravy","hyderabadi chicken curry"],["Butter Chicken Gravy","butter chicken curry"],
+["Nattu Kozhi Gravy","country chicken curry"],["Prawn Gravy","prawn curry"],
+["Mutton Sukka Masala","mutton sukka"],["Mutton Liver Gravy","mutton liver curry"],
+["Egg Masala","egg masala curry"],["Kaadai Masala","quail masala"]]],
+
+["🫓 Parotta",[
+["Parotta","parotta flatbread"],["Egg Kothu Parotta","egg kothu parotta"],
+["Chicken Kothu Parotta","chicken kothu parotta"],["Mutton Kothu Parotta","mutton kothu parotta"],
+["Egg Lapa","egg lapa"],["Chicken Lapa","chicken lapa"],
+["Mutton Lapa","mutton lapa"],["Chilli Parotta","chilli parotta"],
+["Veechu Parotta","veechu parotta"],["Egg Veechu Parotta","egg veechu parotta"]]],
+
+["🔥 Tandoori, Grill & Shawarma",[
+["Tandoori Chicken 1/4","quarter tandoori chicken"],["Tandoori Chicken 1/2","half tandoori chicken"],
+["Tandoori Chicken FULL","whole tandoori chicken"],["Grilled Chicken 1/4","quarter grilled chicken"],
+["Grilled Chicken 1/2","half grilled chicken"],["Grilled Chicken FULL","whole grilled chicken"],
+["Chicken Shawarma","chicken shawarma wrap"],["Plate Shawarma","shawarma plate"]]],
+
+["🥦 Veg Side Dish",[
+["Mushroom 65","mushroom 65 fry"],["Paneer 65","paneer 65 fry"],
+["Cauliflower 65","cauliflower 65 fry"],["Mushroom Manchurian Fry","mushroom manchurian"],
+["Garlic Mushroom Fry","garlic mushroom fry"],["Paneer Manchurian Fry","paneer manchurian"],
+["Garlic Paneer Fry","garlic paneer fry"],["Chilli Mushroom Fry","chilli mushroom fry"],
+["Chilli Paneer Fry","chilli paneer fry"]]],
+
+["🍜 Noodles",[
+["Chicken Noodles","chicken noodles"],["Mutton Noodles","mutton noodles"],
+["Egg Noodles","egg noodles"],["Prawn Noodles","prawn noodles"],
+["Chicken Schezwan Noodles","chicken schezwan noodles"],["Mutton Schezwan Noodles","mutton schezwan noodles"],
+["Prawn Schezwan Noodles","prawn schezwan noodles"],["Egg Schezwan Noodles","egg schezwan noodles"],
+["Mixed Noodles","mixed noodles"],["Mixed Schezwan Noodles","mixed schezwan noodles"],
+["Mushroom Noodles","mushroom noodles"],["Paneer Noodles","paneer noodles"],
+["Mushroom Schezwan Noodles","mushroom schezwan noodles"],["Paneer Schezwan Noodles","paneer schezwan noodles"],
+["Veg Noodles","vegetable noodles"],["Veg Schezwan Noodles","vegetable schezwan noodles"]]],
+
+["🍚 Fried Rice",[
+["Veg Fried Rice","vegetable fried rice"],["Veg Schezwan Rice","vegetable schezwan rice"],
+["Mushroom Fried Rice","mushroom fried rice"],["Paneer Fried Rice","paneer fried rice"],
+["Mushroom Schezwan Rice","mushroom schezwan rice"],["Paneer Schezwan Rice","paneer schezwan rice"],
+["Chicken Fried Rice","chicken fried rice"],["Mutton Fried Rice","mutton fried rice"],
+["Prawn Fried Rice","prawn fried rice"],["Chicken Schezwan Rice","chicken schezwan rice"],
+["Mutton Schezwan Rice","mutton schezwan rice"],["Prawn Schezwan Rice","prawn schezwan rice"],
+["Mixed Rice","mixed fried rice"],["Mixed Schezwan Rice","mixed schezwan rice"],
+["Egg Rice","egg fried rice"],["Egg Schezwan Rice","egg schezwan rice"]]],
+
+["🍳 Egg Items",[
+["Egg Mass","egg masala"],["Egg Poriyal","egg poriyal"],
+["Omelette","omelette egg"],["Kalakki","kalakki egg"],["Half Boil","half boiled egg"]]]
+];
+
+const root=document.getElementById("thaai-menu-categories");
+
+menu.forEach((group,index)=>{
+  const details=document.createElement("details");
+  details.className="menu-category";
+  if(index===0) details.open=true;
+
+  const summary=document.createElement("summary");
+  summary.textContent=group[0]+" ("+group[1].length+" items)";
+  details.appendChild(summary);
+
+  const grid=document.createElement("div");
+  grid.className="menu-items";
+
+  group[1].forEach(item=>{
+    const card=document.createElement("div");
+    card.className="menu-item";
+
+    const img=document.createElement("img");
+    img.alt=item[0];
+    img.loading="lazy";
+
+    const query=encodeURIComponent(item[1].replaceAll(" ",","));
+    img.src="https://loremflickr.com/600/400/"+query;
+
+    img.onerror=function(){
+      this.onerror=null;
+      this.src="https://placehold.co/600x400/f3ece6/5b2a86?text="+encodeURIComponent(item[0]);
+    };
+
+    const title=document.createElement("div");
+    title.className="menu-item-name";
+    title.textContent=item[0];
+
+    card.append(img,title);
+    grid.appendChild(card);
+  });
+
+  details.appendChild(grid);
+  root.appendChild(details);
+});
+})();
+</script>
   </div>
 
   <div class="delivery">
