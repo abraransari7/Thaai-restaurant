@@ -6,170 +6,105 @@
 <title>Thaai Restaurant | Karaikudi</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff8f0;color:#29221d}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+
+header{
+  background:linear-gradient(135deg,#24130c,#793717,#d86b22);
+  color:white;text-align:center;padding:28px 12px;
+  border-bottom:6px solid #ffb347
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #fff8f2;
-  color: #302019;
+.logo{font-size:clamp(35px,8vw,62px);font-weight:900;color:#ffd08a;text-shadow:2px 3px 5px #000}
+.tagline{margin:12px 0;letter-spacing:1px}
+.location{font-size:14px;line-height:1.8}
+.location a{color:#ffe0b5}
+.whatsapp{
+  display:inline-block;background:#20c765;color:white;
+  padding:13px 20px;border-radius:30px;text-decoration:none;
+  font-weight:bold;margin-top:12px
 }
-
-header {
-  background: #55278b;
-  color: white;
-  padding: 35px 20px;
-  text-align: center;
-  border-radius: 0 0 35px 35px;
+.toolbar{
+  display:flex;gap:8px;padding:12px;background:white;
+  position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #0001
 }
-
-header h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+#search{flex:1;min-width:0;padding:12px;border:1px solid #ddd;border-radius:10px}
+.cartbtn{background:#222;color:white;border:0;border-radius:10px;padding:12px}
+#categories{display:flex;gap:8px;overflow-x:auto;padding:12px;background:white}
+#categories button{
+  white-space:nowrap;border:1px solid #ddd;background:white;
+  padding:10px 13px;border-radius:22px
 }
-
-header p {
-  font-size: 14px;
-  letter-spacing: 2px;
+#categories button.active{background:#e96b21;color:white;border-color:#e96b21}
+main{max-width:1200px;margin:auto;padding:14px}
+h2{margin-top:24px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #00000010}
+.card img{
+  width:100%;height:155px;object-fit:cover;background:#eee;display:block
 }
-
-.order-button {
-  display: inline-block;
-  background: #ff841c;
-  color: white;
-  padding: 13px 25px;
-  border-radius: 30px;
-  margin-top: 22px;
-  text-decoration: none;
-  font-weight: bold;
+.info{padding:12px}
+.info h3{font-size:15px;min-height:36px;margin:0 0 8px}
+.info p{font-size:12px;color:#777}
+.add{
+  background:white;color:#16834a;border:1px solid #16834a;
+  border-radius:8px;padding:9px 17px;font-weight:bold
 }
-
-.container {
-  max-width: 850px;
-  margin: auto;
-  padding: 25px 18px;
+.qty{display:flex;align-items:center;gap:12px;color:#16834a;font-weight:bold}
+.qty button{
+  width:30px;height:30px;border:1px solid #16834a;
+  color:#16834a;background:white;border-radius:7px
 }
+.order-summary{background:white;border-radius:14px;padding:16px;margin:22px 0}
+footer{background:#25150e;color:white;text-align:center;padding:25px 12px;line-height:1.8}
+footer a{color:#ffd08a}
 
-h2 {
-  margin: 25px 0 18px;
-  color: #55278b;
-  font-size: 21px;
+#orderModal{
+  display:none;position:fixed;inset:0;background:#0009;z-index:100;
+  align-items:center;justify-content:center;padding:12px
 }
-
-.contact-card {
-  background: white;
-  padding: 20px;
-  border-radius: 18px;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+#orderModal.show{display:flex}
+.modal{
+  width:100%;max-width:480px;max-height:94vh;overflow:auto;
+  background:white;border-radius:20px;padding:20px;box-shadow:0 10px 40px #0005
 }
-
-.contact-card h3 {
-  margin-bottom: 8px;
+.modalhead{
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid #eee;padding-bottom:12px
 }
-
-.contact-card p {
-  color: #75665b;
-  line-height: 1.6;
+.modalhead h2{margin:0;font-size:24px}
+.close{border:0;border-radius:50%;width:38px;height:38px;font-size:24px;background:#eee}
+#popupItems{margin:12px 0}
+.popupitem{
+  display:flex;justify-content:space-between;gap:8px;align-items:center;
+  padding:9px 0;border-bottom:1px solid #eee
 }
-
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+.modal input,.modal textarea,.modal select{
+  width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;
+  border-radius:9px;background:white
 }
-
-.button {
-  flex: 1;
-  text-align: center;
-  padding: 12px 8px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
+.typebuttons{display:flex;gap:10px;margin:8px 0}
+.typebuttons button{
+  flex:1;padding:12px;border:1px solid #16834a;border-radius:9px;
+  background:white;color:#16834a;font-weight:bold
 }
-
-.call {
-  background: #55278b;
+.typebuttons button.selected{background:#16834a;color:white}
+.primary{
+  width:100%;padding:15px;border:0;border-radius:10px;
+  background:#16834a;color:white;font-weight:bold;margin-top:10px
 }
-
-.whatsapp {
-  background: #20bf62;
+.locbtn{
+  width:100%;padding:12px;border:1px solid #c8dff1;
+  background:#eef7ff;color:#145c92;border-radius:9px;margin:5px 0
 }
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+.note{font-size:12px;color:#777;line-height:1.5}
+@media(min-width:650px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card img{height:185px}
 }
-
-.menu-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-}
-
-.menu-card img {
-  width: 100%;
-  height: 145px;
-  object-fit: cover;
-  display: block;
-}
-
-.menu-card h3 {
-  padding: 14px 12px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.delivery {
-  background: linear-gradient(120deg, #ff8b19, #e95a0a);
-  color: white;
-  padding: 23px;
-  margin-top: 25px;
-  border-radius: 18px;
-  text-align: center;
-}
-
-.delivery h2 {
-  color: white;
-  margin: 0 0 10px;
-}
-
-.delivery p {
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-footer {
-  background: #211713;
-  color: white;
-  text-align: center;
-  padding: 25px 15px;
-  margin-top: 30px;
-  line-height: 1.8;
-}
-
-footer a {
-  color: #ffc36b;
-}
-
-@media (max-width: 400px) {
-  .buttons {
-    flex-direction: column;
-  }
-
-  header h1 {
-    font-size: 27px;
-  }
-
-  .menu-card img {
-    height: 120px;
-  }
+@media(min-width:1000px){
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 </style>
 </head>
@@ -177,225 +112,442 @@ footer a {
 <body>
 
 <header>
-  <h1>THAAI RESTAURANT</h1>
-  <p>KARAIKUDI · GOOD FOOD, GOOD MOOD</p>
+  <div class="logo">🍽️ THAAI RESTAURANT</div>
+  <div class="tagline">AUTHENTIC TASTE • FRESH FOOD • MADE WITH LOVE</div>
 
-  <a class="order-button"
-     href="https://wa.me/917321868909?text=Hello%20Thaai%20Restaurant%2C%20I%20would%20like%20to%20place%20an%20order."
-     target="_blank">
-     ORDER ON WHATSAPP ↓
-  </a>
+  <div class="location">
+    📍 3QV7+2H4, KVS Nagar, Kalanivasal,<br>
+    Karaikudi, Tamil Nadu 630002<br>
+    <a href="https://maps.app.goo.gl/5SDFRV71hC4f1bHZ6?g_st=ac"
+       target="_blank" rel="noopener">View Restaurant on Google Maps</a>
+  </div>
+
+  <a class="whatsapp" href="https://wa.me/917321868909"
+     target="_blank" rel="noopener">🟢 WhatsApp Contact: 7321868909</a>
 </header>
 
-<div class="container">
-
-  <h2>📞 CALL OR WHATSAPP</h2>
-
-  <div class="contact-card">
-    <h3>Thaai Restaurant</h3>
-    <p>Phone: +91 73218 68909</p>
-
-    <div class="buttons">
-      <a class="button call" href="tel:+917321868909">
-        📞 Call Now
-      </a>
-
-      <a class="button whatsapp"
-         href="https://wa.me/917321868909?text=Hello%20Thaai%20Restaurant"
-         target="_blank">
-        WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <h2>🍽️ EXPLORE OUR MENU</h2>
-
-  <<section id="menu" class="thaai-menu">
-  <h2>🍽️ THAAI RESTAURANT MENU</h2>
-  <p>Tap a category to see all items.</p>
-  <div id="thaai-menu-categories"></div>
-</section>
-
-<style>
-.thaai-menu{max-width:1100px;margin:auto;padding:20px 12px}
-.thaai-menu h2,.thaai-menu>p{text-align:center}
-.menu-category{margin:12px 0;border:1px solid #ddd;border-radius:12px;overflow:hidden}
-.menu-category summary{background:#5b2a86;color:white;padding:16px;cursor:pointer;font-weight:bold}
-.menu-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}
-.menu-item{border-radius:10px;overflow:hidden;box-shadow:0 2px 8px #0002;background:white}
-.menu-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.menu-item-name{padding:10px 4px;text-align:center;font-weight:bold}
-@media(min-width:650px){.menu-items{grid-template-columns:repeat(4,minmax(0,1fr))}}
-</style>
-
-<script>
-(() => {
-const menu = [
-["🧃 Fresh Juice",[
-["Watermelon Juice","watermelon juice"],["Muskmelon Juice","muskmelon juice"],
-["Apple Juice","apple juice"],["Grapes Juice","grape juice"],
-["Pineapple Juice","pineapple juice"],["Musambi Juice","sweet lime juice"],
-["Pomegranate Juice","pomegranate juice"],["Papaya Juice","papaya juice"]]],
-
-["🥤 Sodas",[
-["Lime Soda Salt","lime soda"],["Fresh Lemon Juice","lemon juice"],
-["Lemon Mint","lemon mint drink"],["Rose Milk","rose milk"],
-["Padam Ger (Rose & Basil)","rose basil drink"],["Masala Thumbs Up","cola soda"]]],
-
-["🥤 Ice Cream Milkshake",[
-["Vanilla Milkshake","vanilla milkshake"],["Chocolate Milkshake","chocolate milkshake"],
-["Strawberry Milkshake","strawberry milkshake"],["Oreo Milkshake","oreo milkshake"],
-["Butterscotch Milkshake","butterscotch milkshake"],["Pista Milkshake","pistachio milkshake"],
-["Black Current Milkshake","blackcurrant milkshake"]]],
-
-["🍹 Mojito",[
-["Blue Current","blue mocktail"],["Mint Mojito","mint lime mojito"]]],
-
-["🍨 Ice Cream Scoop",[
-["Vanilla Topping","vanilla ice cream"],["Strawberry Topping","strawberry ice cream"],
-["Butterscotch Topping","butterscotch ice cream"],["Chocolate Topping","chocolate ice cream"],
-["Pistha Topping","pistachio ice cream"],["Black Current Topping","blackcurrant ice cream"],
-["Mango Topping","mango ice cream"]]],
-
-["🍛 Gravy",[
-["Chettinad Chicken Gravy","chettinad chicken curry"],["Pepper Chicken Gravy","pepper chicken curry"],
-["Chilli Chicken Gravy","chilli chicken gravy"],["Chicken Manchurian Gravy","chicken manchurian"],
-["Hyderabad Chicken Gravy","hyderabadi chicken curry"],["Butter Chicken Gravy","butter chicken curry"],
-["Nattu Kozhi Gravy","country chicken curry"],["Prawn Gravy","prawn curry"],
-["Mutton Sukka Masala","mutton sukka"],["Mutton Liver Gravy","mutton liver curry"],
-["Egg Masala","egg masala curry"],["Kaadai Masala","quail masala"]]],
-
-["🫓 Parotta",[
-["Parotta","parotta flatbread"],["Egg Kothu Parotta","egg kothu parotta"],
-["Chicken Kothu Parotta","chicken kothu parotta"],["Mutton Kothu Parotta","mutton kothu parotta"],
-["Egg Lapa","egg lapa"],["Chicken Lapa","chicken lapa"],
-["Mutton Lapa","mutton lapa"],["Chilli Parotta","chilli parotta"],
-["Veechu Parotta","veechu parotta"],["Egg Veechu Parotta","egg veechu parotta"]]],
-
-["🔥 Tandoori, Grill & Shawarma",[
-["Tandoori Chicken 1/4","quarter tandoori chicken"],["Tandoori Chicken 1/2","half tandoori chicken"],
-["Tandoori Chicken FULL","whole tandoori chicken"],["Grilled Chicken 1/4","quarter grilled chicken"],
-["Grilled Chicken 1/2","half grilled chicken"],["Grilled Chicken FULL","whole grilled chicken"],
-["Chicken Shawarma","chicken shawarma wrap"],["Plate Shawarma","shawarma plate"]]],
-
-["🥦 Veg Side Dish",[
-["Mushroom 65","mushroom 65 fry"],["Paneer 65","paneer 65 fry"],
-["Cauliflower 65","cauliflower 65 fry"],["Mushroom Manchurian Fry","mushroom manchurian"],
-["Garlic Mushroom Fry","garlic mushroom fry"],["Paneer Manchurian Fry","paneer manchurian"],
-["Garlic Paneer Fry","garlic paneer fry"],["Chilli Mushroom Fry","chilli mushroom fry"],
-["Chilli Paneer Fry","chilli paneer fry"]]],
-
-["🍜 Noodles",[
-["Chicken Noodles","chicken noodles"],["Mutton Noodles","mutton noodles"],
-["Egg Noodles","egg noodles"],["Prawn Noodles","prawn noodles"],
-["Chicken Schezwan Noodles","chicken schezwan noodles"],["Mutton Schezwan Noodles","mutton schezwan noodles"],
-["Prawn Schezwan Noodles","prawn schezwan noodles"],["Egg Schezwan Noodles","egg schezwan noodles"],
-["Mixed Noodles","mixed noodles"],["Mixed Schezwan Noodles","mixed schezwan noodles"],
-["Mushroom Noodles","mushroom noodles"],["Paneer Noodles","paneer noodles"],
-["Mushroom Schezwan Noodles","mushroom schezwan noodles"],["Paneer Schezwan Noodles","paneer schezwan noodles"],
-["Veg Noodles","vegetable noodles"],["Veg Schezwan Noodles","vegetable schezwan noodles"]]],
-
-["🍚 Fried Rice",[
-["Veg Fried Rice","vegetable fried rice"],["Veg Schezwan Rice","vegetable schezwan rice"],
-["Mushroom Fried Rice","mushroom fried rice"],["Paneer Fried Rice","paneer fried rice"],
-["Mushroom Schezwan Rice","mushroom schezwan rice"],["Paneer Schezwan Rice","paneer schezwan rice"],
-["Chicken Fried Rice","chicken fried rice"],["Mutton Fried Rice","mutton fried rice"],
-["Prawn Fried Rice","prawn fried rice"],["Chicken Schezwan Rice","chicken schezwan rice"],
-["Mutton Schezwan Rice","mutton schezwan rice"],["Prawn Schezwan Rice","prawn schezwan rice"],
-["Mixed Rice","mixed fried rice"],["Mixed Schezwan Rice","mixed schezwan rice"],
-["Egg Rice","egg fried rice"],["Egg Schezwan Rice","egg schezwan rice"]]],
-
-["🍳 Egg Items",[
-["Egg Mass","egg masala"],["Egg Poriyal","egg poriyal"],
-["Omelette","omelette egg"],["Kalakki","kalakki egg"],["Half Boil","half boiled egg"]]]
-];
-
-const root=document.getElementById("thaai-menu-categories");
-
-menu.forEach((group,index)=>{
-  const details=document.createElement("details");
-  details.className="menu-category";
-  if(index===0) details.open=true;
-
-  const summary=document.createElement("summary");
-  summary.textContent=group[0]+" ("+group[1].length+" items)";
-  details.appendChild(summary);
-
-  const grid=document.createElement("div");
-  grid.className="menu-items";
-
-  group[1].forEach(item=>{
-    const card=document.createElement("div");
-    card.className="menu-item";
-
-    const img=document.createElement("img");
-    img.alt=item[0];
-    img.loading="lazy";
-
-    const query=encodeURIComponent(item[1].replaceAll(" ",","));
-    img.src="https://loremflickr.com/600/400/"+query;
-
-    img.onerror=function(){
-      this.onerror=null;
-      this.src="https://placehold.co/600x400/f3ece6/5b2a86?text="+encodeURIComponent(item[0]);
-    };
-
-    const title=document.createElement("div");
-    title.className="menu-item-name";
-    title.textContent=item[0];
-
-    card.append(img,title);
-    grid.appendChild(card);
-  });
-
-  details.appendChild(grid);
-  root.appendChild(details);
-});
-})();
-</script>
-  </div>
-
-  <div class="delivery">
-    <h2>🏠 HOME DELIVERY</h2>
-    <p>Want to order your favourite food?<br>
-    Contact us directly on WhatsApp!</p>
-
-    <a class="order-button"
-       href="https://wa.me/917321868909?text=Hello%20Thaai%20Restaurant%2C%20I%20want%20to%20enquire%20about%20home%20delivery."
-       target="_blank">
-       CONTACT US ON WHATSAPP
-    </a>
-  </div>
-
-  <h2>📍 FIND OUR RESTAURANT</h2>
-
-  <div class="contact-card">
-    <p>
-      3QV7+2H4, KVS Nagar, Kalanivasal,<br>
-      Karaikudi, Tamil Nadu 630002
-    </p>
-
-    <a class="button call"
-       style="display:block;margin-top:15px;"
-       href="https://www.google.com/maps/search/?api=1&query=3QV7%2B2H4%2C%20KVS%20Nagar%2C%20Kalanivasal%2C%20Karaikudi%2C%20Tamil%20Nadu%20630002"
-       target="_blank">
-       📍 GET DIRECTIONS
-    </a>
-  </div>
-
-  <div class="contact-card">
-    <h3>⏰ Opening Hours</h3>
-    <p>Every Day: 10:00 AM – 11:00 PM</p>
-  </div>
-
+<div class="toolbar">
+  <input id="search" placeholder="🔎 Search your favourite food...">
+  <button class="cartbtn" onclick="openPopup()">
+    🛒 Cart (<span id="count">0</span>)
+  </button>
 </div>
 
+<nav id="categories"></nav>
+
+<main>
+  <div id="menu"></div>
+
+  <section class="order-summary">
+    <h2>🛒 Your Cart</h2>
+    <div id="summary">Your cart is empty.</div>
+    <button class="primary" onclick="openPopup()">CONTINUE TO ORDER</button>
+  </section>
+</main>
+
 <footer>
-  <strong>THAAI RESTAURANT</strong><br>
-  Karaikudi, Tamil Nadu<br>
-  Call: <a href="tel:+917321868909">+91 73218 68909</a><br>
-  © 2026 Thaai Restaurant
+  <h2>🍽️ Thaai Restaurant</h2>
+  Fresh Food • Great Taste • Friendly Service<br>
+  Karaikudi, Tamil Nadu 630002<br>
+  WhatsApp: <a href="https://wa.me/917321868909">7321868909</a><br>
+  <a href="https://maps.app.goo.gl/5SDFRV71hC4f1bHZ6?g_st=ac"
+     target="_blank" rel="noopener">Get Directions</a>
 </footer>
+
+<div id="orderModal" onclick="outsideClose(event)">
+  <div class="modal">
+    <div class="modalhead">
+      <h2>🛒 Your Order</h2>
+      <button class="close" onclick="closePopup()">×</button>
+    </div>
+
+    <h3>Selected Food Items</h3>
+    <div id="popupItems">Your cart is empty.</div>
+
+    <h3>Choose Order Type</h3>
+    <div class="typebuttons">
+      <button id="deliveryBtn" class="selected"
+        onclick="setType('Home Delivery')">🛵 Home Delivery</button>
+      <button id="takeawayBtn"
+        onclick="setType('Takeaway')">🥡 Takeaway</button>
+    </div>
+
+    <h3>Customer Details</h3>
+    <input id="customerName" placeholder="Your Full Name *" autocomplete="name">
+    <input id="customerPhone" type="tel" placeholder="Mobile Number *" autocomplete="tel">
+    <textarea id="customerAddress" rows="3"
+      placeholder="Complete Delivery Address *" autocomplete="street-address"></textarea>
+
+    <button class="locbtn" onclick="shareLocation()">📍 Share My Current Location</button>
+    <p id="locationStatus" class="note">Location sharing is optional.</p>
+
+    <p class="note">
+      Your order will open in WhatsApp for you to review and send.
+      Prices must be confirmed with the restaurant.
+    </p>
+
+    <button class="primary" onclick="placeOrder()">🟢 PLACE ORDER ON WHATSAPP</button>
+  </div>
+</div>
+
+<script>
+const WA = "917321868909";
+
+const categories = [
+["Gravy","🍛",[
+"Chettinad Chicken Gravy","Pepper Chicken Gravy","Chilli Chicken Gravy",
+"Chicken Manchurian Gravy","Hyderabad Chicken Gravy","Butter Chicken Gravy",
+"Nattu Kozhi Gravy","Prawn Gravy","Mutton Sukka Masala","Mutton Liver Gravy",
+"Egg Masala","Kaadai Masala"
+]],
+["Parotta","🫓",[
+"Parotta","Egg Kothu Parotta","Chicken Kothu Parotta","Mutton Kothu Parotta",
+"Egg Lapa","Chicken Lapa","Mutton Lapa","Chilli Parotta",
+"Veechu Parotta","Egg Veechu Parotta"
+]],
+["Tandoori / Grill / Shawarma","🍗",[
+"Tandoori Chicken 1/4","Tandoori Chicken 1/2","Tandoori Chicken Full",
+"Grilled Chicken 1/4","Grilled Chicken 1/2","Grilled Chicken Full",
+"Chicken Shawarma","Plate Shawarma"
+]],
+["Veg Side Dishes","🥦",[
+"Mushroom 65","Paneer 65","Cauliflower 65","Mushroom Manchurian Fry",
+"Garlic Mushroom Fry","Paneer Manchurian Fry","Garlic Paneer Fry",
+"Chilli Mushroom Fry","Chilli Paneer Fry"
+]],
+["Noodles","🍜",[
+"Chicken Noodles","Mutton Noodles","Egg Noodles","Prawn Noodles",
+"Chicken Schezwan Noodles","Mutton Schezwan Noodles","Prawn Schezwan Noodles",
+"Egg Schezwan Noodles","Mixed Noodles","Mixed Schezwan Noodles",
+"Mushroom Noodles","Paneer Noodles","Mushroom Schezwan Noodles",
+"Paneer Schezwan Noodles","Veg Noodles","Veg Schezwan Noodles"
+]],
+["Fried Rice","🍚",[
+"Veg Fried Rice","Veg Schezwan Rice","Mushroom Fried Rice","Paneer Fried Rice",
+"Mushroom Schezwan Rice","Paneer Schezwan Rice","Chicken Fried Rice",
+"Mutton Fried Rice","Prawn Fried Rice","Chicken Schezwan Rice",
+"Mutton Schezwan Rice","Prawn Schezwan Rice","Mixed Rice",
+"Mixed Schezwan Rice","Egg Rice","Egg Schezwan Rice"
+]],
+["Egg","🍳",["Egg Mass","Egg Poriyal","Omelette","Kalakki","Half Boil"]],
+["Fresh Juice","🥤",[
+"Watermelon Juice","Muskmelon Juice","Apple Juice","Grapes Juice",
+"Pineapple Juice","Musambi Juice","Pomegranate Juice","Papaya Juice"
+]],
+["Sodas","🥤",[
+"Lime Soda Salt","Fresh Lemon Juice","Lemon Mint","Rose Milk",
+"Rose & Basil","Masala Thums Up"
+]],
+["Ice Cream Milkshakes","🥛",[
+"Vanilla Milkshake","Chocolate Milkshake","Strawberry Milkshake",
+"Oreo Milkshake","Butterscotch Milkshake","Pista Milkshake",
+"Blackcurrant Milkshake"
+]],
+["Mojito","🍹",["Blue Current Mojito","Mint Mojito"]],
+["Ice Cream Scoops","🍨",[
+"Vanilla Ice Cream","Strawberry Ice Cream","Butterscotch Ice Cream",
+"Chocolate Ice Cream","Pista Ice Cream","Blackcurrant Ice Cream","Mango Ice Cream"
+]]
+];
+
+/*
+  Food image source:
+  Uses the food's name in a search-based image URL.
+  This provides item-specific search results, not guaranteed direct photos.
+  For a production site, use verified, licensed image files hosted by you.
+*/
+function getFoodImage(item, category) {
+  const specialImages = {
+    "Parotta": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=700&q=80",
+    "Chicken Fried Rice": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=700&q=80",
+    "Veg Fried Rice": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80",
+    "Chicken Noodles": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=80",
+    "Grilled Chicken 1/4": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=80",
+    "Watermelon Juice": "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=700&q=80",
+    "Vanilla Ice Cream": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=80",
+    "Chocolate Milkshake": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=80",
+    "Pomegranate Juice": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=700&q=80"
+  };
+
+  if (specialImages[item]) return specialImages[item];
+
+  const query = encodeURIComponent(item + " Indian food");
+  return "https://tse1.mm.bing.net/th?q=" + query + "&w=700&h=500&c=7&rs=1&p=0";
+}
+
+let cart = {};
+let activeCategory = "All";
+let orderType = "Home Delivery";
+let customerLocation = "";
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function renderCategories() {
+  const nav = document.getElementById("categories");
+  nav.innerHTML = "";
+
+  [["All","🍽️"], ...categories.map(c => [c[0],c[1]])].forEach(([name,icon]) => {
+    const b = document.createElement("button");
+    b.textContent = icon + " " + name;
+    if (name === activeCategory) b.classList.add("active");
+    b.onclick = () => {
+      activeCategory = name;
+      renderCategories();
+      renderMenu();
+    };
+    nav.appendChild(b);
+  });
+}
+
+function renderMenu() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const menu = document.getElementById("menu");
+  menu.innerHTML = "";
+
+  categories.forEach(cat => {
+    if (activeCategory !== "All" && activeCategory !== cat[0]) return;
+
+    const items = cat[2].filter(item => item.toLowerCase().includes(q));
+    if (!items.length) return;
+
+    const section = document.createElement("section");
+    section.innerHTML = `<h2>${cat[1]} ${esc(cat[0])}</h2><div class="grid"></div>`;
+    const grid = section.querySelector(".grid");
+
+    items.forEach(item => {
+      const key = cat[0] + "::" + item;
+      const qty = cart[key] || 0;
+      const card = document.createElement("article");
+      card.className = "card";
+
+      card.innerHTML = `
+        <img src="${getFoodImage(item, cat[0])}"
+             alt="${esc(item)}"
+             loading="lazy"
+             referrerpolicy="no-referrer">
+        <div class="info">
+          <h3>${esc(item)}</h3>
+          <p>Freshly prepared • Price on request</p>
+          <div class="control"></div>
+        </div>`;
+
+      const img = card.querySelector("img");
+      img.onerror = function() {
+        this.onerror = null;
+        this.src = "https://placehold.co/600x400/f8eee4/70452b?text=" +
+          encodeURIComponent(item);
+      };
+
+      const control = card.querySelector(".control");
+
+      if (qty === 0) {
+        const b = document.createElement("button");
+        b.className = "add";
+        b.textContent = "ADD +";
+        b.onclick = () => changeQty(key, 1, true);
+        control.appendChild(b);
+      } else {
+        const row = document.createElement("div");
+        row.className = "qty";
+
+        const minus = document.createElement("button");
+        minus.textContent = "−";
+        minus.onclick = () => changeQty(key, -1, false);
+
+        const count = document.createElement("span");
+        count.textContent = qty;
+
+        const plus = document.createElement("button");
+        plus.textContent = "+";
+        plus.onclick = () => changeQty(key, 1, false);
+
+        row.append(minus, count, plus);
+        control.appendChild(row);
+      }
+
+      grid.appendChild(card);
+    });
+
+    menu.appendChild(section);
+  });
+
+  if (!menu.innerHTML) {
+    menu.innerHTML = "<p>No food found. Try another search.</p>";
+  }
+}
+
+function changeQty(key, delta, show) {
+  cart[key] = (cart[key] || 0) + delta;
+  if (cart[key] <= 0) delete cart[key];
+
+  renderMenu();
+  updateCart();
+
+  if (show) openPopup();
+}
+
+function updateCart() {
+  const entries = Object.entries(cart);
+
+  document.getElementById("count").textContent =
+    entries.reduce((s, [k,q]) => s + q, 0);
+
+  document.getElementById("summary").innerHTML = entries.length
+    ? entries.map(([k,q]) => `${esc(k.split("::")[1])} × ${q}`).join("<br>")
+    : "Your cart is empty.";
+
+  updatePopupItems();
+}
+
+function updatePopupItems() {
+  const el = document.getElementById("popupItems");
+  const entries = Object.entries(cart);
+
+  if (!entries.length) {
+    el.textContent = "Your cart is empty.";
+    return;
+  }
+
+  el.innerHTML = "";
+
+  entries.forEach(([key,qty]) => {
+    const row = document.createElement("div");
+    row.className = "popupitem";
+
+    const name = document.createElement("span");
+    name.textContent = key.split("::")[1];
+
+    const controls = document.createElement("div");
+    controls.className = "qty";
+
+    const minus = document.createElement("button");
+    minus.textContent = "−";
+    minus.onclick = () => changeQty(key, -1, false);
+
+    const number = document.createElement("span");
+    number.textContent = qty;
+
+    const plus = document.createElement("button");
+    plus.textContent = "+";
+    plus.onclick = () => changeQty(key, 1, false);
+
+    controls.append(minus, number, plus);
+    row.append(name, controls);
+    el.appendChild(row);
+  });
+}
+
+function openPopup() {
+  document.getElementById("orderModal").classList.add("show");
+  updatePopupItems();
+}
+
+function closePopup() {
+  document.getElementById("orderModal").classList.remove("show");
+}
+
+function outsideClose(event) {
+  if (event.target.id === "orderModal") closePopup();
+}
+
+function setType(type) {
+  orderType = type;
+
+  document.getElementById("deliveryBtn").classList.toggle(
+    "selected", type === "Home Delivery"
+  );
+  document.getElementById("takeawayBtn").classList.toggle(
+    "selected", type === "Takeaway"
+  );
+
+  document.getElementById("customerAddress").placeholder =
+    type === "Home Delivery"
+      ? "Complete Delivery Address *"
+      : "Address (optional for takeaway)";
+}
+
+function shareLocation() {
+  const status = document.getElementById("locationStatus");
+
+  if (!navigator.geolocation) {
+    status.textContent = "Location is not supported by this browser.";
+    return;
+  }
+
+  status.textContent = "Please allow location access.";
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    customerLocation =
+      `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+
+    status.textContent =
+      "✅ Location ready and will be added to your WhatsApp order.";
+  }, () => {
+    status.textContent =
+      "Could not access location. Please enter your address manually.";
+  }, {
+    enableHighAccuracy: true,
+    timeout: 15000,
+    maximumAge: 60000
+  });
+}
+
+function placeOrder() {
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+
+  if (!Object.keys(cart).length) {
+    alert("Please add food items first.");
+    return;
+  }
+
+  if (!name || !phone) {
+    alert("Please enter your name and mobile number.");
+    return;
+  }
+
+  if (!/^[0-9+\s()-]{7,20}$/.test(phone)) {
+    alert("Please enter a valid mobile number.");
+    return;
+  }
+
+  if (orderType === "Home Delivery" && !address) {
+    alert("Please enter your delivery address.");
+    return;
+  }
+
+  let msg = "🍽️ *NEW ORDER - THAAI RESTAURANT*\n\n";
+  msg += `👤 Name: ${name}\n📱 Mobile: ${phone}\n📦 Order Type: ${orderType}\n`;
+
+  if (address) msg += `🏠 Address: ${address}\n`;
+  if (customerLocation) msg += `📍 Customer Location: ${customerLocation}\n`;
+
+  msg += "\n🛒 *ORDER ITEMS*\n";
+
+  Object.entries(cart).forEach(([key,qty]) => {
+    msg += `• ${key.split("::")[1]} × ${qty}\n`;
+  });
+
+  msg += "\n💰 Please confirm total price with the restaurant.\n";
+  msg += "\n📍 Restaurant: 3QV7+2H4, KVS Nagar, Kalanivasal, Karaikudi, Tamil Nadu 630002";
+
+  window.open(
+    `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,
+    "_blank"
+  );
+}
+
+document.getElementById("search").addEventListener("input", renderMenu);
+
+renderCategories();
+renderMenu();
+updateCart();
+</script>
 
 </body>
 </html>
